@@ -1,0 +1,3 @@
+/* Write your T-SQL query statement below */
+select eu.unique_id , e.name from  EmployeeUNI eu 
+Right join Employees e ON eu.id = e.id
