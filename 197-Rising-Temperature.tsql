@@ -6,17 +6,28 @@ FROM (
            DATEDIFF(DAY, LAG(recordDate) OVER (ORDER BY recordDate), recordDate) AS day_diff
     FROM Weather
 ) AS temp_comp
-WHERE day_diff = 1 -- Ensure the previous record is exactly 1 day before
+WHERE day_diff = 1
 AND temperature > prv_temp;
 
 
--- **************** i put alias name to understand who is related to each other 
 
--- SELECT current_day_id
+-- **************** Alternative using aliases for clarity **************** 
+
+-- SELECT id
 -- FROM (
---     SELECT id AS current_day_id, 
---            temperature AS current_day_temperature, 
---            LAG(temperature) OVER (ORDER BY recordDate) AS previous_day_temperature
+--     SELECT id, 
+--            temperature, 
+--            LAG(temperature) OVER (ORDER BY recordDate) AS previous_day_temperature, -- Previous day's temperature
+--            DATEDIFF(DAY, LAG(recordDate) OVER (ORDER BY recordDate), recordDate) AS day_difference -- Difference in days between current and previous record dates
 --     FROM Weather
--- ) AS temp_comparison
--- WHERE current_day_temperature > previous_day_temperature;
+-- ) AS temp_comp
+-- WHERE day_difference = 1 -- Ensure the previous record is exactly 1 day before the current record
+-- AND temperature > previous_day_temperature; -- Compare current day's temperature with the previous day's temperature
+
+-- **************** My main solution using self join **************** 
+
+-- select cur.id
+-- from Weather as cur
+-- join Weather as pre
+--     on cur.recordDate = DateAdd(day,1,pre.recordDate)
+-- where cur.temperature > pre.temperature 
