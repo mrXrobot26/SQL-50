@@ -1,0 +1,6 @@
+/* Write your T-SQL query statement below */
+select cur.id
+from Weather as cur
+join Weather as pre
+    on cur.recordDate = DateAdd(day,1,pre.recordDate)
+where cur.temperature > pre.temperature 
