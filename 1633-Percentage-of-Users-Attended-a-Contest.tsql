@@ -1,0 +1,31 @@
+/* Write your T-SQL query statement below */
+
+WITH TotalUsers AS (
+    SELECT COUNT(user_id) AS total_users
+    FROM Users 
+),
+TotalUserInOneContest AS(
+    SELECT contest_id , COUNT(user_id) AS total_user_in_cne_contest
+    FROM Register
+    GROUP BY contest_id
+)
+SELECT tuc.contest_id ,
+ROUND(
+        CAST(
+            (tuc.total_user_in_cne_contest * 100.0 / tu.total_users) AS FLOAT
+        )
+    ,2) AS percentage 
+FROM TotalUsers tu
+CROSS JOIN TotalUserInOneContest tuc
+ORDER BY percentage DESC , tuc.contest_id ASC
+
+
+
+--                                                         NOTES
+
+-- in JOIN there is no ON condtion so i USE CROSS JOIN 
+-- CTE => WITH TotalUsers AS , ContestRegistrations AS => thos are CTE , is a temp data not store anywhere just on memory you must use your SELECT statement after it direct(or in the seme selected query) becuse if you didnt it will not work cuz its temp
+--tuc.total_user_in_cne_contest and tu.total_users are integers, the division operation will perform integer division before multiplying by 100.0 so , 100.0 first not in the end 
+-- ((tuc.total_user_in_cne_contest / tu.total_users) * 100.0) XXXXXXXXXXXXXXXXX
+--  ((tuc.total_user_in_cne_contest * 100.0) / tu.total_users) => true
+
