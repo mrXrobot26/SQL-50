@@ -1,0 +1,21 @@
+/* Write your T-SQL query statement below */
+WITH JoinDate AS (
+    SELECT 
+        player_id,
+        MIN(event_date) AS join_date
+    FROM Activity 
+    GROUP BY player_id
+),
+AllUser AS (
+    SELECT 
+        COUNT(DISTINCT player_id) AS all_user 
+    FROM Activity 
+)
+SELECT 
+    ROUND(
+        CAST(SUM(CASE WHEN DATEADD(day, 1, j.join_date) = a.event_date THEN 1 ELSE 0 END) AS FLOAT) 
+        / (SELECT all_user FROM AllUser), 
+        2
+    ) AS fraction  
+FROM Activity a
+JOIN JoinDate j ON a.player_id = j.player_id
