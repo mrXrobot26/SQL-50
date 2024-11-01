@@ -1,0 +1,13 @@
+/* Write your T-SQL query statement below */
+WITH FirstSales AS(
+    SELECT 
+    *,
+    RANK() OVER(PARTITION BY product_id ORDER BY year) AS rnk
+    FROM Sales 
+)
+SELECT product_id,
+year as first_year,
+quantity,
+price
+FROM FirstSales
+WHERE rnk = 1
