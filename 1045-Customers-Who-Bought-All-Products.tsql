@@ -1,0 +1,18 @@
+/* Write your T-SQL query statement below */
+WITH TotalProducts  AS(
+    SELECT
+    COUNT(product_key) AS number_of_products
+    FROM Product
+),
+CustomerProductCount AS(
+    SELECT customer_id,
+    COUNT(DISTINCT product_key) AS number_of_uniqe_proudects_for_each_user
+    FROM Customer 
+    GROUP BY customer_id 
+)
+SELECT cpc.customer_id
+FROM CustomerProductCount cpc
+JOIN TotalProducts
+ON number_of_products = number_of_uniqe_proudects_for_each_user
+
+
