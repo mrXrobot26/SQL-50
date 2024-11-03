@@ -1,0 +1,9 @@
+/* Write your T-SQL query statement below */
+-- TO SAY THAT IS triangle
+-- x+y>z
+-- x+z>y
+-- y+z>x
+
+SELECT X ,Y ,Z , 
+CASE WHEN X+Y>Z AND X+Z>Y AND Y+Z>X THEN 'Yes' ELSE 'No' END AS triangle 
+FROM Triangle
