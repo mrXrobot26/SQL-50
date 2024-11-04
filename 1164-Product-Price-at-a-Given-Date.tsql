@@ -1,0 +1,13 @@
+/* Write your T-SQL query statement below */
+WITH FirstProduct AS(
+    SELECT
+    *,
+    ROW_NUMBER()OVER(PARTITION BY product_id ORDER BY change_date DESC) AS rn
+    FROM Products
+    WHERE change_date <= '2019-08-16'
+)
+SELECT p.product_id , 
+       COALESCE(fp.new_price ,10) AS price 
+FROM (SELECT DISTINCT product_id FROM  Products ) p
+LEFT JOIN FirstProduct fp
+ON p.product_id = fp.product_id AND fp.rn =1
