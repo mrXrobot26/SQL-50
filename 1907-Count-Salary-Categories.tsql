@@ -1,0 +1,24 @@
+/* Write your T-SQL query statement below */
+WITH GetNumLow AS(
+    SELECT COUNT(income) AS accounts_count
+    FROM Accounts
+    WHERE income < 20000
+),
+GetNumAverage AS(
+    SELECT COUNT(income) AS accounts_count
+    FROM Accounts
+    WHERE income BETWEEN 20000 AND 50000
+),
+GetNumHigh AS(
+    SELECT COUNT(income) AS accounts_count
+    FROM Accounts
+    WHERE income > 50000
+)
+SELECT 'Low Salary' AS category , accounts_count
+FROM GetNumLow
+UNION ALL
+SELECT 'Average Salary' AS category , accounts_count
+FROM GetNumAverage
+UNION ALL
+SELECT 'High Salary' AS category , accounts_count
+FROM GetNumHigh
