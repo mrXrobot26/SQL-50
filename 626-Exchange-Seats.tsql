@@ -1,11 +1,16 @@
 /* Write your T-SQL query statement below */
-SELECT s1.id ,
-CASE
-WHEN s1.id % 2 = 1 AND s2.id IS NOT NULL THEN s2.student 
-WHEN s1.id % 2 = 0 THEN s2.student 
-ELSE s1.student
-END AS student 
-FROM  Seat s1
-LEFT JOIN Seat s2
-ON (s1.id % 2 = 1 AND s1.id =s2.id-1)
-OR (s1.id % 2 = 0 AND s1.id =s2.id+1)
+
+SELECT 
+    s1.id,
+    CASE 
+        WHEN s1.id % 2 = 1 AND s2.student IS NOT NULL THEN s2.student
+        WHEN s1.id % 2 = 0 THEN s2.student
+        ELSE s1.student
+    END AS student
+FROM Seat s1
+LEFT JOIN Seat s2 
+    ON 
+       (s1.id % 2 = 1 AND s1.id = s2.id - 1) 
+    OR (s1.id % 2 = 0 AND s1.id = s2.id + 1) 
+
+-- note that the ON of JOIN related to CASE
