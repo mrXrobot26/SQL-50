@@ -1,0 +1,39 @@
+/* Write your T-SQL query statement below */
+WITH UserRatings  AS(
+    SELECT u.name as results , COUNT(mr.user_id) AS user_rateing
+    FROM Users u
+    RIGHT JOIN MovieRating mr
+    ON mr.user_id = u.user_id
+    GROUP BY u.name
+),
+MaxRatingCount  AS(
+    SELECT MAX(user_rateing) AS max_user_rateing FROM UserRatings
+),
+MovieAverageRatings AS(
+    SELECT m.title AS results , AVG(mr.rating*1.0) avg_rateing
+    FROM Movies m 
+    RIGHT JOIN MovieRating mr
+    on m.movie_id = mr.movie_id
+    WHERE YEAR(mr.created_at) = 2020 AND MONTH(mr.created_at)=2
+    GROUP BY m.title
+),
+MaxAverageRating AS(
+    SELECT MAX(avg_rateing) AS max_avg_rating FROM MovieAverageRatings
+)
+SELECT results FROM (
+SELECT TOP 1 results 
+FROM UserRatings
+JOIN MaxRatingCount 
+ON max_user_rateing = user_rateing
+ORDER BY results
+) AS user_queru
+
+UNION ALL
+
+SELECT results FROM (
+SELECT TOP 1 results 
+FROM MovieAverageRatings
+JOIN MaxAverageRating 
+ON avg_rateing = max_avg_rating
+ORDER BY results
+) AS movie_queru
