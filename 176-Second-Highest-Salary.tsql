@@ -1,0 +1,12 @@
+/* Write your T-SQL query statement below */
+WITH RankedSalaries AS (
+    SELECT salary,
+           DENSE_RANK() OVER (ORDER BY salary DESC) AS rank
+    FROM Employee
+)
+SELECT 
+    MAX(salary) AS SecondHighestSalary
+FROM 
+    RankedSalaries
+WHERE 
+    rank = 2;
