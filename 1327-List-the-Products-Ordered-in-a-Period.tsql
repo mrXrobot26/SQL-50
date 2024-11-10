@@ -1,0 +1,10 @@
+/* Write your T-SQL query statement below */
+WITH SumWights AS(
+    SELECT * ,
+    SUM(Weight) OVER(ORDER BY Turn) AS my_sum_wight
+    FROM Queue
+)
+SELECT TOP 1 person_name
+FROM SumWights
+WHERE my_sum_wight <=1000
+ORDER BY turn DESC
