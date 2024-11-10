@@ -1,0 +1,7 @@
+/* Write your T-SQL query statement below */
+DELETE FROM Person 
+WHERE ID NOT IN(
+    SELECT min(id)
+    FROM Person 
+    GROUP BY email
+)
