@@ -1,0 +1,16 @@
+/* Write your T-SQL query statement below */
+WITH FriendCounts AS (
+    SELECT requester_id AS user_id
+    FROM RequestAccepted
+    UNION ALL
+    SELECT accepter_id AS user_id
+    FROM RequestAccepted
+),
+UserFriendCounts AS (
+    SELECT user_id, COUNT( user_id) AS num_friends
+    FROM FriendCounts
+    GROUP BY user_id
+)
+SELECT TOP 1 user_id AS id, num_friends AS num
+FROM UserFriendCounts
+ORDER BY num_friends DESC;
