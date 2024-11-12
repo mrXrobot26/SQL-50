@@ -1,11 +1,9 @@
-# LeetCode
+![Red Modern Programming YouTube Thumbnail](https://github.com/user-attachments/assets/b1bef731-b5a4-4916-a18c-3e09bbe47f6c)# LeetCode SQL 50
 
 This repository contains my solutions to LeetCode problems.
 
-Created with :heart: by [LeetPush](https://github.com/husamahmud/LeetPush)
+![Grey Green Modern Minimalist Business Zoom Virtual Background (1)](https://github.com/user-attachments/assets/da95438f-9637-4d90-afc5-d0ecc808fb8a)
 
- ## Made by 
- - Tut: [GitHub](https://github.com/TutTrue) - [LinkedIn](https://www.linkedin.com/in/mahmoud-hamdy-8b6825245/)
- - Hüsam: [GitHub](https://github.com/husamahmud) - [LinkedIn](https://www.linkedin.com/in/husamahmud/)
 
- Happy coding! 🚀
+
+# BESSA IS HERE
