@@ -1,4 +1,4 @@
-# LeetCode SQL 50
+# LeetCode SQL 50 With T-SQL(sql server)
 
 This repository contains my solutions to LeetCode problems.
 
