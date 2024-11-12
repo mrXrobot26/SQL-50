@@ -1,4 +1,4 @@
-![Red Modern Programming YouTube Thumbnail](https://github.com/user-attachments/assets/b1bef731-b5a4-4916-a18c-3e09bbe47f6c)# LeetCode SQL 50
+# LeetCode SQL 50
 
 This repository contains my solutions to LeetCode problems.
 
